@@ -15,5 +15,5 @@ client = OpenAI(
     base_url="https://openrouter.ai/api/v1",
     api_key=os.environ.get("OPENROUTER_API_KEY",
                            "..."),
-    # Fill '...' with your actual API-KEY. Sorry it was a bit expensive I can't share it with you! :)
+    # Fill '...' with your actual API-KEY.
 )
