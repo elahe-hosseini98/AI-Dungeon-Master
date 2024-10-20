@@ -21,8 +21,7 @@ python app.py
 ```
 Here’s a preview of the main page of the game:
 
-![AI Dungeon Master Main Page](![Uploading image.png…]()
-)
+<img width="1127" alt="image" src="https://github.com/user-attachments/assets/2793ce98-2526-4f2f-a1dd-62d188b8f616">
 
 ### Requirements:
 To run the game, you need an OpenRouter API key. Please add your key to the following configuration file:
