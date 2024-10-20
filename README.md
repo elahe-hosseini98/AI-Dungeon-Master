@@ -29,9 +29,6 @@ To run the game, you need an OpenRouter API key. Please add your key to the foll
 ```bash
 config > openAI_config
 ```
-Here’s a preview of the main page of the game:
-
-<img width="1127" alt="image" src="https://github.com/user-attachments/assets/a9a61eaf-04d1-4a7c-8e7b-e68efdbf9966">
 
 ## Game Logic Overview
 
