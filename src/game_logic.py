@@ -13,7 +13,7 @@ def has_won(game_quests):
 
 
 def has_lost(player_stats, player_damage_limit=3):
-    if int(player_stats["Damage"]["value"]) > player_damage_limit:
+    if int(player_stats["Damage"]["value"]) >= player_damage_limit:
         return True
     return False
 
