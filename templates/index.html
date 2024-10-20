@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Dungeon Master</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="inventories">
+            <h2>
+                <img src="{{ url_for('static', filename='icons/Inventories.svg') }}" style="width: 60px; height: 60px;" alt="Inventories Icon" class="icon">
+                Inventories
+            </h2>
+            <hr>
+            {% for category, items in player_inventories.items() %}
+                <h3>
+                    <img src="{{ url_for('static', filename='icons/' + category + '.svg') }}" alt="{{ category }} Icon" class="icon">
+                    {{ category }}:
+                </h3>
+                <ul>
+                    {% if items %}
+                        {% for item, description in items %}
+                            <li><strong>{{ item }}:</strong> {{ description }}</li>
+                        {% endfor %}
+                    {% else %}
+                        <li>Empty</li>
+                    {% endif %}
+                </ul>
+                {% if not loop.last %}
+                    <hr>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        {% if inventories_has_update %}
+            <div id="inventory-popup" class="popup">
+                Your inventory has been updated!
+            </div>
+        {% endif %}
+
+        <div class="statistics">
+            <h2>
+                <img src="{{ url_for('static', filename='icons/Statistics.svg') }}" style="width: 60px; height: 60px;" alt="Inventories Icon" class="icon">
+                Statistics
+            </h2>
+            <hr>
+                {% for stat, details in player_stats.items() %}
+                    <h3>
+                        <img src="{{ url_for('static', filename='icons/' + stat + '.svg') }}" alt="{{ category }} Icon" class="icon">
+                        {{ stat }}:
+                    </h3>
+                    <ul>
+                        <li><strong>Value:</strong> {{ details.value }}</li>
+                        <li><strong>Description:</strong> {{ details.definition }}</li>
+                    </ul>
+
+                    {% if not loop.last %}
+                        <hr>
+                    {% endif %}
+                {% endfor %}
+        </div>
+
+        {% if stats_has_update %}
+            <div id="stats-popup" class="popup">
+                Your Statistics has been updated!
+            </div>
+        {% endif %}
+
+
+    </div>
+
+    <div class="container">
+        <div class="logo-bar">
+            <img src="/static/images/logo2.jpg" alt="Game Logo" class="logo"/>
+        </div>
+
+        <div class="game-log">
+            {% for entry in player_actions_responses %}
+                <p>{{ entry | safe }}</p>
+
+                {% if loop.index == 1 %}
+                    <div class="game-quests">
+                        <p><strong>Quests:</strong></p>
+                        {% for quest in game_quests %}
+                            {% if quest.main_quest %}
+                                <p>
+                                    <img src="{{ url_for('static', filename='icons/' ~ quest.status ~ '.svg') }}" alt="{{ quest.status }}" class="icon"/>
+                                    {% if quest.status == 'Done' %}
+                                        <s>Main Quest: {{ quest.main_quest }}</s>
+                                    {% else %}
+                                        Main Quest: {{ quest.main_quest }}
+                                    {% endif %}
+                                </p>
+                            {% elif quest.side_quest %}
+                                <p>
+                                    <img src="{{ url_for('static', filename='icons/' ~ quest.status ~ '.svg') }}" alt="{{ quest.status }}" class="icon"/>
+                                    {% if quest.status == 'Done' %}
+                                        <s>Side Quest: {{ quest.side_quest }}</s>
+                                    {% else %}
+                                        Side Quest: {{ quest.side_quest }}
+                                    {% endif %}
+                                </p>
+                            {% endif %}
+                        {% endfor %}<hr>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        <form method="POST" action="/play">
+            <textarea name="player_input" placeholder="Enter your action..." required></textarea>
+            <button type="submit">Submit
+            <img src="/static/icons/submit.svg" alt="send icon" class="icon"/>
+            </button>
+        </form>
+
+        <form id="reset-form" method="POST" action="/restart">
+            <button id="reset-button" type="button" onclick="confirmReset()">Restart
+            <img src="/static/icons/reset.svg" alt="reset icon" class="icon"/>
+            </button>
+        </form>
+    </div>
+
+    <div id="loading-overlay">
+        <div class="spinner"></div>
+    </div>
+
+    <script>
+        function confirmReset() {
+            if (confirm('Are you sure you want to restart the game?')) {
+                document.getElementById('reset-form').submit();
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const popups = ['inventory-popup', 'stats-popup'];
+
+            popups.forEach(id => {
+                const popup = document.getElementById(id);
+                if (popup) {
+                    popup.style.opacity = 1;
+                    popup.style.transform = 'translateY(-20px)';
+                    setTimeout(() => {
+                        popup.style.opacity = 0;
+                        popup.style.transform = 'translateY(0)';
+                    }, 5000);
+                }
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const popups = ['inventory-popup', 'stats-popup'];
+
+            popups.forEach(id => {
+                const popup = document.getElementById(id);
+                if (popup) {
+                    popup.style.opacity = 1;
+                    popup.style.transform = 'translateY(-20px)';
+                    setTimeout(() => {
+                        popup.style.opacity = 0;
+                        popup.style.transform = 'translateY(0)';
+                    }, 5000);
+                }
+            });
+        });
+
+        const form = document.querySelector('form[action="/play"]');
+        form.addEventListener('submit', function() {
+            document.getElementById('loading-overlay').style.display = 'block';
+        });
+    </script>
+
+</body>
+</html>

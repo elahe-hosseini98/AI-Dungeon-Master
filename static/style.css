@@ -1,0 +1,228 @@
+@font-face {
+    font-family: 'Playwright England SemiJoined';
+    src: url('/static/fonts/Playwrite_GB_S/static/PlaywriteGBS-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Caveat';
+    src: url('/static/fonts/Caveat/static/Caveat-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: "Caveat", Arial, sans-serif, 'Playwright England SemiJoined';
+    background-image: url("/static/images/bg3.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #2c2c2c;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    font-size: x-large;
+}
+
+.sidebar {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 70px;
+}
+
+.inventories, .statistics {
+    width: 18%;
+    padding: 1%;
+    background: rgb(54 52 52 / 44%);
+    text-align: left;
+    color: #e9e9e9;
+    height: fit-content;
+    max-height: 700px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    font-size: large;
+}
+
+.inventories > * {
+    direction: ltr;
+}
+
+.inventories h2, .statistics h2 {
+    text-align: center !important;
+}
+
+.inventories {
+    margin-left: 1%;
+    direction: rtl;
+}
+
+.statistics {
+    margin-right: 1%;
+}
+
+.logo-bar{
+    background-color: black;
+    height: fit-content;
+}
+
+.logo {
+    width: 340px;
+    height: 80px;
+    padding-top: 6px;
+}
+
+.container {
+    margin: 30px auto;
+    width: 40%;
+    background: rgb(246 246 246 / 70%);;
+    position: relative;
+    box-shadow: 0px 0px 10px 7px rgb(0 0 0 / 42%);
+}
+
+.container h1 {
+    color: #46583c;
+    font-size: 2.2em;
+}
+
+.game-log {
+    text-align: justify;
+    padding: 20px;
+}
+
+textarea {
+    padding: 5px;
+    font-size: 16px;
+    width: 85%;
+    resize: none;
+    border-radius: 5px;
+    font-family: "Caveat", Arial, sans-serif, 'Playwright England SemiJoined';
+    font-size: x-large;
+}
+
+textarea::placeholder {
+    font-family: "Caveat";
+    font-size: x-large;
+}
+
+button {
+    padding: 3px 8px;
+    font-size: 16px;
+    background-color: #458555;
+    color: white;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    box-shadow: 0px 0px 3px 1px #515f53;
+    transition: 0.3s ease;
+    margin-bottom: 10px;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+button:hover {
+    box-shadow: inset 0px 0px 4px 1px #515f53;
+}
+
+#reset-button {
+    background-color: #cf5858;
+    position: fixed;
+    top: 10px;
+    right: 30px;
+    padding: 3px;
+    margin-top: 0px;
+    font-size: large;
+}
+
+.popup {
+    position: fixed;
+    bottom: 10px;
+    color: white;
+    font-weight: bold;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+#inventory-popup {
+    left: 10px;
+    background-color: #4CAF50;
+}
+
+#stats-popup {
+    right: 10px;
+    background-color: #6b9ed1;
+}
+
+.icon {
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
+}
+
+.game-quests {
+    font-size: smaller;
+    font-weight: bold;
+}
+
+.game-quests .icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 4px;
+}
+
+#loading-overlay {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 60px;
+    height: 60px;
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid rgb(120 133 173);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+    ::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: gainsboro;
+        border-radius: 5px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #414b6a;
+        border-radius: 5px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #23283a;;
+    }

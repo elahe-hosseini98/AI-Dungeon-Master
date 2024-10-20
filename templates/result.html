@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='result.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Game Outcome</title>
+</head>
+<body>
+    <div class="container">
+        <div class="logo-bar">
+            <img src="/static/images/logo2.jpg" alt="Game Logo" class="logo"/>
+        </div>
+
+        <h1 class="{{ outcome }}">{{ "Congratulations! You've won!" if outcome == 'win' else "Game Over! You lost." }}</h1>
+
+        <h2>Your Statistics</h2>
+        <div class="stats">
+            {% for stat, details in player_stats.items() %}
+                <div class="stat">
+                    <strong>{{ stat }}:</strong> {{ details.value }} <br>
+                    <em>{{ details.definition }}</em>
+                </div>
+            {% endfor %}
+        </div>
+
+        <form action="{{ url_for('restart') }}" method="post">
+            <button type="submit" id="reset-game">Start Again</button>
+        </form>
+    </div>
+</body>
+</html>
